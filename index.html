@@ -11,9 +11,18 @@
 </head>
 
 <body>
-    <!-- Data coming from Store -->
-    <div x-data x-text="$store.currentUser.username"></div>
-
+    <div x-data="{
+        open: false,
+        get getOpen() {
+            return this.open;
+        },
+        set setOpen(open) {
+            this.open = open
+        }
+    }">
+        <button @click="setOpen = !getOpen">Open/Close</button>
+        <div x-show="getOpen">Content</div>
+    </div>
 </body>
 
 </html>

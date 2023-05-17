@@ -19,6 +19,18 @@
     <li>
         <a href="#data-less-components">Data-Less Components</a>
     </li>
+    <li>
+        <a href="#data-coming-from-store">Data coming from Store</a>
+    </li>
+    <li>
+        <a href="#x-init">x-init</a>
+    </li>
+    <li>
+        <a href="#scoping">Scoping</a>
+    </li>
+    <li>
+        <a href="#getter--setter">Getter & Setter</a>
+    </li>
   </ol>
 </details>
 
@@ -78,7 +90,7 @@ Versi AlpineJS yang saya gunakan adalah versi 3.12.1
 ```
 
 - x-text digunakan untuk menampilkan state/variable pada x-data secara reactive.
-- jika x-text berisi format text selain string seperti tag html, maka data yang ditampilkan akan berupa hardcode (diconvert ke string dan tidak mengikuti aturan html)
+- jika x-text berisi format text selain string (seperti tag html, object, array, json, dll), maka data yang ditampilkan akan berupa hardcode (diconvert ke string dan tidak mengikuti aturan html jika html)
 
 ```html
 <div x-data="{name: 'Zura'}">
@@ -106,6 +118,8 @@ Versi AlpineJS yang saya gunakan adalah versi 3.12.1
 # Re-usable Data
 
 - Reusable data merupakan teknik untuk tidak mengulang-ulang membuat x-data dengan value yang sama, dengan cara memindahkan x-data ke Alpine.data
+- Alpine.data merupakan bagian dari Global method.
+- Alpine.data digunakan untuk reusable data
 - Contoh kasus yang sering ditemukan adalah dropdown.
 
 ```html
@@ -158,6 +172,93 @@ document.addEventListener("alpine:init", () => {
 
 ```html
 <div x-data @click="console.log('Something')">Munculkan console Something</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Data coming from Store
+
+- Data cpming from Store memanfaatkan Global Method Alpine.store
+- Alpine.store digunakan untuk mendeklarasikan data agar dapat diakses pada global scope (di semua tempat)
+- Alpine.store tidak ditempatkan di tag html, tapi di tag script. Jadi untuk membuat Alpine.store, bisa dengan cara menambahkan tag script, atau membuat file js baru lalu dihubungkan kedalam html.
+
+```js
+// alpine.js
+Alpine.store("currentUser", {
+  username: "TheCodeholic",
+  posts: ["Post1", "Post2"],
+});
+```
+
+- Untuk mengakses data yang terdapat pada Alpine.store menggunakan `$store`
+
+```html
+<div x-data x-text="$store.currentUser.username"></div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-init
+
+- x-init digunakan untuk menginisialisasi component AlpineJS.
+- yang membedakan inisialisasi x-init dengan x-data adalah x-init akan langsung menjalankan perintah didalamnya.
+
+```html
+<div x-init="console.log('Init')"></div>
+```
+
+- x-data juga bisa langsung menjalankan perintah, tapi harus menggunakan function init.
+
+```html
+<div
+  x-data="{
+        init(){
+            console.log('I am initialized')
+        }
+    }"
+></div>
+```
+
+- x-init juga dapat digunakan untuk fetch json lalu menampilkan data tersebut pada component alpine yang sama.
+
+```html
+<div
+  x-data="{todo: {}}"
+  x-init="todo = await (await fetch('https://jsonplaceholder.typicode.com/todos/1')).json()"
+>
+  <span x-text="todo.title"></span>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Scoping
+
+- Scoping AlpineJS akan mencari parent terdekatnya untuk mengambil variable, jika tidak ada akan terus menelusuri parentnya.
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Getter & Setter
+
+- Konsep getter & setter sama seperti pada javascript.
+- Saya juga kurang faham soal ini, TheCodeholic juga ga terlalu menjelaskan detail.
+- TheCodeholic sepertinya salah dalam penerapan getter & setter. Saya memperbaikinya di block code
+
+```html
+<div
+  x-data="{
+        open: false,
+        get getOpen() {
+            return this.open;
+        },
+        set setOpen(open) {
+            this.open = open
+        }
+    }"
+>
+  <button @click="setOpen = !getOpen">Open/Close</button>
+  <div x-show="getOpen">Content</div>
+</div>
 ```
 
 <p align="right"><a href="#top">Go 🔝</a></p>
