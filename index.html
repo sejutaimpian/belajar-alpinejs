@@ -11,17 +11,12 @@
 </head>
 
 <body>
-    <div x-data="{
-        open: false,
-        get getOpen() {
-            return this.open;
-        },
-        set setOpen(open) {
-            this.open = open
-        }
-    }">
-        <button @click="setOpen = !getOpen">Open/Close</button>
-        <div x-show="getOpen">Content</div>
+    <div x-data="{ open: false }">
+        <button x-on:click="open = ! open">Open/Close</button>
+
+        <div x-show="open" x-transition:enter.duration.200ms x-transition:leave.duration.2000ms>
+            Content
+        </div>
     </div>
 </body>
 

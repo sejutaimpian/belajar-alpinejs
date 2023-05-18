@@ -263,6 +263,46 @@ Alpine.store("currentUser", {
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 
+# x-show & x-transition
+
+- x-show digunakan untuk menampilkan atau menyembunyikan componen AlpineJS
+- x-show menerima value boolean, true atau false.
+
+```html
+<div x-data="{open: false}">
+  <button @click="open = !open">Open/Close</button>
+  <div x-show="open">Content...</div>
+</div>
+```
+
+- x-transition digunakan untuk memberikan transition pada componen AlpineJS yang berproperty x-show
+
+```html
+<div x-data="{open: false}">
+  <button @click="open = !open">Open/Close</button>
+  <div x-show="open" x-transition>Content</div>
+</div>
+```
+
+- x-transition bisa dikustomisasi mulai dari `duration`, `delay`, `opacity`, hingga `scale`
+
+```html
+<div x-data="{ open: false }">
+  <button x-on:click="open = ! open">Open/Close</button>
+  <div
+    x-show="open"
+    x-transition:enter.duration.200ms
+    x-transition:leave.duration.2000ms
+  >
+    Content
+  </div>
+</div>
+```
+
+- Untuk selengkapnya, cek saja di dokumentasi
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
 # Judul
 
 <p align="right"><a href="#top">Go 🔝</a></p>
