@@ -43,6 +43,12 @@
     <li>
         <a href="#x-for-in-range">x-for in range</a>
     </li>
+    <li>
+        <a href="#x-bindclass">x-bind:class</a>
+    </li>
+    <li>
+        <a href="#x-bindstyle">x-bind:style</a>
+    </li>
   </ol>
 </details>
 
@@ -50,6 +56,7 @@
 
 Repo ini saya buat sebagai riwayat sekaligus rangkuman belajar materi AlpineJS.  
 Materi ini saya dapat dari berbagai sumber, tapi berpatok kepada [Video YT @TheCodeholic](https://youtu.be/5ILDMMLgX0E) karena materinya lengkap, langsung studi kasus membuat component, dan menambahkan plugin.  
+Materi ini tidak termasuk challange  
 Versi AlpineJS yang saya gunakan adalah versi 3.12.1
 
 # Introduction
