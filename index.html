@@ -13,10 +13,9 @@
 <body>
     <div x-data="{ open: false }">
         <button x-on:click="open = ! open">Open/Close</button>
-
-        <div x-show="open" x-transition:enter.duration.200ms x-transition:leave.duration.2000ms>
-            Content
-        </div>
+        <template x-if="open">
+            <div>Content</div>
+        </template>
     </div>
 </body>
 

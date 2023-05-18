@@ -31,6 +31,12 @@
     <li>
         <a href="#getter--setter">Getter & Setter</a>
     </li>
+    <li>
+        <a href="#x-show--x-transition">x-show & x-transition</a>
+    </li>
+    <li>
+        <a href="#x-if">x-if</a>
+    </li>
   </ol>
 </details>
 
@@ -267,6 +273,7 @@ Alpine.store("currentUser", {
 
 - x-show digunakan untuk menampilkan atau menyembunyikan componen AlpineJS
 - x-show menerima value boolean, true atau false.
+- jika x-show bernilai true, maka AlpineJS menambahkan CSS `display:none`.
 
 ```html
 <div x-data="{open: false}">
@@ -300,6 +307,21 @@ Alpine.store("currentUser", {
 ```
 
 - Untuk selengkapnya, cek saja di dokumentasi
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-if
+
+- x-if mirip seperti x-show, hanya saja x-if tidak bisa menambahkan x-transition dan dibungkus dengan tag \<template>
+
+```html
+<div x-data="{ open: false }">
+  <button x-on:click="open = ! open">Open/Close</button>
+  <template x-if="open">
+    <div>Content</div>
+  </template>
+</div>
+```
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 
