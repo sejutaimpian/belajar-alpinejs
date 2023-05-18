@@ -11,20 +11,9 @@
 </head>
 
 <body>
-    <style>
-        .yellow {
-            background-color: yellow;
-        }
-
-        .bordered {
-            border: 2px solid brown;
-        }
-    </style>
-    <div x-data="{clicked: false}">
-        <button class="bordered" :class="{'yellow' : clicked}" @click="clicked = !clicked">
-            Click me
-        </button>
-    </div>
+    <button x-data="{id: ''}" x-bind:id="id" @click="id = Math.round(Math.random() * 10000)">
+        Random id = <span x-text="id"></span>
+    </button>
 </body>
 
 </html>

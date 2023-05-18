@@ -395,6 +395,35 @@ Alpine.store("currentUser", {
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 
+# x-bind:style
+
+```html
+<div x-data="{clicked: false}">
+  <button
+    :style="clicked && {'backgroundColor': 'red'}"
+    @click="clicked = !clicked"
+  >
+    Click me
+  </button>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-bind:id
+
+```html
+<button
+  x-data="{id: ''}"
+  x-bind:id="id"
+  @click="id = Math.round(Math.random() * 10000)"
+>
+  Random id = <span x-text="id"></span>
+</button>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
 # Judul
 
 <p align="right"><a href="#top">Go 🔝</a></p>
