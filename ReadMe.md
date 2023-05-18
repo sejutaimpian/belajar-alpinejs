@@ -56,7 +56,7 @@ Versi AlpineJS yang saya gunakan adalah versi 3.12.1
 
 > Your new, lightweight, JavaScript framework
 
-- Kalo kata dosen kita semua (Pak Sandhika Galih), AlpineJS adalah TailwindCSS versi Javascript. Jadi kita menuliskan kode javascript langsung di file html, lebih tepatnya sebagai property tag html.
+- Kalo kata dosen kita semua (Pak Sandhika Galih), AlpineJS adalah TailwindCSS versi Javascript. Jadi kita menuliskan kode javascript langsung di file html, lebih tepatnya sebagai atribut tag html.
 - Materi AlpineJS dibagi kedalam 3 bagian, yaitu materi dasar (Directive & Magic Property), materi component, dan materi plugin
 
 <p align="right"><a href="#top">Go 🔝</a></p>
@@ -288,7 +288,7 @@ Alpine.store("currentUser", {
 </div>
 ```
 
-- x-transition digunakan untuk memberikan transition pada componen AlpineJS yang berproperty x-show
+- x-transition digunakan untuk memberikan transition pada componen AlpineJS yang beratribut x-show
 
 ```html
 <div x-data="{open: false}">
@@ -359,6 +359,39 @@ Alpine.store("currentUser", {
   </template>
 </div>
 ```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-bind:class
+
+- x-bind digunakan untuk mengatur atribut html seperti id, placeholder, class, style, dll
+- untuk memudahkan kondisional, gunakanlah seperti pada javascript (Logical Operator, ternary operator, dsb)
+- x-bind untuk class ditulis `x-bind:class`. x-bind untuk placeholder ditulis `x-bind:placeholder`, dst.
+- x-bind mempunyai shorthand. x-bind:class menjadi `:class`, x-bind:placeholder menjadi `:placeholder`, dst
+- x-bind:class memiliki kelebihan yaitu akan menambahkan class baru dan tidak menimpanya. berbeda dengan x-bind atribut yang lain, yang mana akan menimpanya.
+
+```html
+<style>
+  .yellow {
+    background-color: yellow;
+  }
+
+  .bordered {
+    border: 2px solid brown;
+  }
+</style>
+<div x-data="{clicked: false}">
+  <button
+    class="bordered"
+    x-bind:class="clicked ? 'yellow' : ''"
+    @click="clicked = !clicked"
+  >
+    Click me
+  </button>
+</div>
+```
+
+- x-bind:class juga bisa menggunakan object syntax. Tapi sebaiknya jangan gegabah. Untuk selengkapnya, cek saja di dokumentasi
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 
