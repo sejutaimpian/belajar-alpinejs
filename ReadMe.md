@@ -49,6 +49,12 @@
     <li>
         <a href="#x-bindstyle">x-bind:style</a>
     </li>
+    <li>
+        <a href="#x-bindid">x-bind:id</a>
+    </li>
+    <li>
+        <a href="#x-on">x-on</a>
+    </li>
   </ol>
 </details>
 
@@ -428,6 +434,39 @@ Alpine.store("currentUser", {
   Random id = <span x-text="id"></span>
 </button>
 ```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-on
+
+- x-on digunakan untuk memberikan Javascript Event kedalam komponen AlpineJS
+- Selengkapnya tentang Javascript Event dapat dilihat [di sini](https://developer.mozilla.org/en-US/docs/Web/API/Event)
+- x-on dituliskan x-on:{javascriptEvent}. Contohnya `x-on:click=""`
+- x-on dapat disingkat menjadi @. Contohnya `@click=""`
+- $event digunakan untuk mengakses DOM element $this.
+
+```html
+<div x-data="{keyword:''}">
+  <button @click="alert('Hello World!')">Say Hi</button>
+  <label x-text="keyword"></label>
+  <input type="text" @keyup.debounce="keyword = $event.target.value" />
+  <div x-data="{modal: false}">
+    <button @click="modal = true">Show Modal</button>
+    <div x-show="modal" @click.outside="modal = false">Modal Content...</div>
+  </div>
+</div>
+```
+
+- AlpineJS menawarkan cara untuk kustomisasi Event dengan magic property $dispatch
+
+```html
+<div x-data @edit="console.log('Edit Clicked')">
+  <button @click="$dispatch('edit')">Edit</button>
+</div>
+```
+
+- AlpineJS menawarkan beberapa directive modifier untuk mengkustomisasi event listener seperti diantaranya `.prevent`, `.stop`, `outside`, `.window`, `.document`, `.once`, `.debounce`, `.throttle`, `.self`, `camel`, `.dot`, `.passive`, dan `.capture`
+- Untuk selengkapnya, cek saja di dokumentasi
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 

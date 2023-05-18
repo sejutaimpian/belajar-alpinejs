@@ -11,9 +11,9 @@
 </head>
 
 <body>
-    <button x-data="{id: ''}" x-bind:id="id" @click="id = Math.round(Math.random() * 10000)">
-        Random id = <span x-text="id"></span>
-    </button>
+    <div x-data @edit="console.log('Edit Clicked')">
+        <button @click="$dispatch('edit')">Edit</button>
+    </div>
 </body>
 
 </html>
