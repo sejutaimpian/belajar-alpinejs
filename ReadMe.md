@@ -37,6 +37,12 @@
     <li>
         <a href="#x-if">x-if</a>
     </li>
+    <li>
+        <a href="#x-for">x-for</a>
+    </li>
+    <li>
+        <a href="#x-for-in-range">x-for in range</a>
+    </li>
   </ol>
 </details>
 
@@ -313,12 +319,43 @@ Alpine.store("currentUser", {
 # x-if
 
 - x-if mirip seperti x-show, hanya saja x-if tidak bisa menambahkan x-transition dan dibungkus dengan tag \<template>
+- x-if harus ditempatkan pada tag \<template> dan tag \<template> HARUS berisi hanya satu elemen root
 
 ```html
 <div x-data="{ open: false }">
   <button x-on:click="open = ! open">Open/Close</button>
   <template x-if="open">
     <div>Content</div>
+  </template>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-for
+
+- x-for digunakan untuk melakukan iterasi sebagaimana for di javascript
+- x-for harus ditempatkan pada tag \<template> dan tag \<template> HARUS berisi hanya satu elemen root
+- x-for sebaiknya memiliki :key untuk keperluan re-ordering
+
+```html
+<div x-data="{posts: [{id: 1, title: 'title 1'}, {id: 2, title: 'title 2'}]}">
+  <template x-for="(post, index) in posts" :key="post.id">
+    <h2 x-text="post.id + '. ' + post.title"></h2>
+  </template>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-for in range
+
+- x-for in range artinya melakukan pengulangan langsung tanpa menggunakan bantuan total array/object.
+
+```html
+<div x-data>
+  <template x-for="n in 10">
+    <p x-text="n"></p>
   </template>
 </div>
 ```

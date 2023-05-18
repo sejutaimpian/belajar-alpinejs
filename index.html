@@ -11,10 +11,9 @@
 </head>
 
 <body>
-    <div x-data="{ open: false }">
-        <button x-on:click="open = ! open">Open/Close</button>
-        <template x-if="open">
-            <div>Content</div>
+    <div x-data>
+        <template x-for="n in 10">
+            <p x-text="n"></p>
         </template>
     </div>
 </body>
