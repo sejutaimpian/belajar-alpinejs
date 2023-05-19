@@ -58,6 +58,15 @@
     <li>
         <a href="#x-model">x-model</a>
     </li>
+    <li>
+        <a href="#x-effect">x-effect</a>
+    </li>
+    <li>
+        <a href="#x-ignore">x-ignore</a>
+    </li>
+    <li>
+        <a href="#x-ref">x-ref</a>
+    </li>
   </ol>
 </details>
 
@@ -492,6 +501,106 @@ Alpine.store("currentUser", {
 
 - AlpineJS menawarkan beberapa directive modifier untuk mengkustomisasi event listener seperti diantaranya `.lazy`, `.number`, .`debounce`, `.throttle`, dan `.fill`.
 - Untuk selengkapnya, cek saja di dokumentasi [x-model#modifier](https://alpinejs.dev/directives/model#modifiers)
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-effect
+
+- x-effect digunakan untuk memantau state yang ada didalamnya. Jika state didalamnya berubah, maka x-effect akan diupdate.
+
+```html
+<div x-data="{name: 'Zura', message: null}">
+  <p x-effect="message = 'Hello ' + name"></p>
+  <p x-text="message"></p>
+  <button @click="name= 'John'">Change Name</button>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-ignore
+
+- x-ignore digunakan untuk mengabaikan element yang terdapat pada komponen AlpineJS
+
+```html
+<div x-data="{name: 'Zura'}">
+  <div x-ignore>
+    <p x-text="name"></p>
+  </div>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-ref
+
+- x-ref digunakan untuk mengakses DOM element yang lain (bukan $this)
+- x-ref sebagai inisialisasi, $refs untuk akses
+
+```html
+<div x-data>
+  <input x-ref="inputEmail" type="text" placeholder="Email" />
+  <button @click="$refs.inputEmail.style.borderColor = 'red'">Check</button>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-cloack
+
+- Dalam kasus x-show yang false, kan terlihat kontennya sebentar lalu kemudian baru dihilangkan oleh AlpineJS. Untuk mengatasi ini bisa menggunakan x-cloack
+- Caranya menambahkan css lalu menambahkan atribut x-cloack pada element x-show.
+
+```css
+/* CSS */
+[x-cloak] {
+  display: none !important;
+}
+```
+
+```html
+<!-- Komponen AlpineJS -->
+<div x-data="{open: false}">
+  <button @click="open = !open">Open/Close</button>
+  <div x-show="open" x-cloak>Modal Content...</div>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-teleport
+
+- x-teleport digunakan untuk memindahkan element pada DOM tree
+- x-teleport harus ditempatkan pada tag \<template> dan tag \<template> HARUS berisi hanya satu elemen root
+
+```html
+<div x-data>
+  <p>Some Content</p>
+
+  <div x-data="{open: false}">
+    <button @click="open = !open">Open Modal</button>
+    <template x-teleport="#tele">
+      <div x-show="open">Modal Content</div>
+    </template>
+  </div>
+
+  <p>More Content</p>
+  <div id="tele">
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit,
+      distinctio?
+    </p>
+  </div>
+  <p>Lorem More Content</p>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Directive yang belum dijelaskan
+
+- [x-modelable](https://alpinejs.dev/directives/modelable)
+- [x-id](https://alpinejs.dev/directives/id)
+
 <p align="right"><a href="#top">Go 🔝</a></p>
 
 # Judul

@@ -11,10 +11,21 @@
 </head>
 
 <body>
-    <div x-data="{keyword: null}">
-        <input type="text" placeholder="Search for items" x-model.debounce.500ms="keyword" />
-        <p x-text="keyword"></p>
-        <button @click="keyword = null">Kosongkan</button>
+    <div x-data>
+        <p>Some Content</p>
+
+        <div x-data="{open: false}">
+            <button @click="open = !open">Open Modal</button>
+            <template x-teleport="#tele">
+                <div x-show="open">Modal Content</div>
+            </template>
+        </div>
+
+        <p>More Content</p>
+        <div id="tele">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit, distinctio?</p>
+        </div>
+        <p>More Content</p>
     </div>
 </body>
 
