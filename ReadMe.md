@@ -55,6 +55,9 @@
     <li>
         <a href="#x-on">x-on</a>
     </li>
+    <li>
+        <a href="#x-model">x-model</a>
+    </li>
   </ol>
 </details>
 
@@ -311,6 +314,7 @@ Alpine.store("currentUser", {
 ```
 
 - x-transition bisa dikustomisasi mulai dari `duration`, `delay`, `opacity`, hingga `scale`
+- Untuk selengkapnya, cek saja di dokumentasi [x-transition](https://alpinejs.dev/directives/transition)
 
 ```html
 <div x-data="{ open: false }">
@@ -324,8 +328,6 @@ Alpine.store("currentUser", {
   </div>
 </div>
 ```
-
-- Untuk selengkapnya, cek saja di dokumentasi
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 
@@ -404,7 +406,7 @@ Alpine.store("currentUser", {
 </div>
 ```
 
-- x-bind:class juga bisa menggunakan object syntax. Tapi sebaiknya jangan gegabah. Untuk selengkapnya, cek saja di dokumentasi
+- x-bind:class juga bisa menggunakan object syntax. Tapi sebaiknya jangan gegabah. Untuk selengkapnya, cek saja di dokumentasi [x-on#class-object-syntax](https://alpinejs.dev/directives/bind#class-object-syntax)
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 
@@ -458,6 +460,7 @@ Alpine.store("currentUser", {
 ```
 
 - AlpineJS menawarkan cara untuk kustomisasi Event dengan magic property $dispatch
+- Untuk selengkapnya, cek saja di dokumentasi [$dispatch](https://alpinejs.dev/magics/dispatch)
 
 ```html
 <div x-data @edit="console.log('Edit Clicked')">
@@ -466,8 +469,29 @@ Alpine.store("currentUser", {
 ```
 
 - AlpineJS menawarkan beberapa directive modifier untuk mengkustomisasi event listener seperti diantaranya `.prevent`, `.stop`, `outside`, `.window`, `.document`, `.once`, `.debounce`, `.throttle`, `.self`, `camel`, `.dot`, `.passive`, dan `.capture`
-- Untuk selengkapnya, cek saja di dokumentasi
+- Untuk selengkapnya, cek saja di dokumentasi [x-on#modifier](https://alpinejs.dev/directives/on#modifiers)
 
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# x-model
+
+- x-model digunakan untuk mengikat value pada input element kepada x-data. Jadi kalo value pada imputan berubah, maka x-data ikut berubah, begitupun sebaliknya.
+- x-model bekerja pada input element seperti `input`, `textarea`, `select`
+
+```html
+<div x-data="{keyword: null}">
+  <input
+    type="text"
+    placeholder="Search for items"
+    x-model.debounce.500ms="keyword"
+  />
+  <p x-text="keyword"></p>
+  <button @click="keyword = null">Kosongkan</button>
+</div>
+```
+
+- AlpineJS menawarkan beberapa directive modifier untuk mengkustomisasi event listener seperti diantaranya `.lazy`, `.number`, .`debounce`, `.throttle`, dan `.fill`.
+- Untuk selengkapnya, cek saja di dokumentasi [x-model#modifier](https://alpinejs.dev/directives/model#modifiers)
 <p align="right"><a href="#top">Go 🔝</a></p>
 
 # Judul

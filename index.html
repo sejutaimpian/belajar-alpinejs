@@ -11,8 +11,10 @@
 </head>
 
 <body>
-    <div x-data @edit="console.log('Edit Clicked')">
-        <button @click="$dispatch('edit')">Edit</button>
+    <div x-data="{keyword: null}">
+        <input type="text" placeholder="Search for items" x-model.debounce.500ms="keyword" />
+        <p x-text="keyword"></p>
+        <button @click="keyword = null">Kosongkan</button>
     </div>
 </body>
 
