@@ -11,21 +11,14 @@
 </head>
 
 <body>
-    <div x-data>
-        <p>Some Content</p>
+    <div x-data="{ id: $id('text-input') }">
+        <label :for="id"> <!-- "text-input-1" -->
+            <input type="text" :id="id"> <!-- "text-input-1" -->
+    </div>
 
-        <div x-data="{open: false}">
-            <button @click="open = !open">Open Modal</button>
-            <template x-teleport="#tele">
-                <div x-show="open">Modal Content</div>
-            </template>
-        </div>
-
-        <p>More Content</p>
-        <div id="tele">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit, distinctio?</p>
-        </div>
-        <p>More Content</p>
+    <div x-data="{ id: $id('text-input') }">
+        <label :for="id"> <!-- "text-input-2" -->
+            <input type="text" :id="id"> <!-- "text-input-2" -->
     </div>
 </body>
 

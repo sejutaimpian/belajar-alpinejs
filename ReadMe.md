@@ -67,6 +67,33 @@
     <li>
         <a href="#x-ref">x-ref</a>
     </li>
+    <li>
+        <a href="#tambahan">Tambahan</a>
+    </li>
+    <li>
+        <a href="#el">$el</a>
+    </li>
+    <li>
+        <a href="#refs--store">$refs & $store</a>
+    </li>
+    <li>
+        <a href="#watch">$watch</a>
+    </li>
+    <li>
+        <a href="#dispatch">$dispatch</a>
+    </li>
+    <li>
+        <a href="#nexttick">$nextTick</a>
+    </li>
+    <li>
+        <a href="#root">$root</a>
+    </li>
+    <li>
+        <a href="#data">$data</a>
+    </li>
+    <li>
+        <a href="#id--x-id">$id & x-id</a>
+    </li>
   </ol>
 </details>
 
@@ -239,6 +266,7 @@ Alpine.store("currentUser", {
 
 - x-init digunakan untuk menginisialisasi component AlpineJS.
 - yang membedakan inisialisasi x-init dengan x-data adalah x-init akan langsung menjalankan perintah didalamnya.
+- Nanti kalian akan menemukan kasus untuk memakan x-data dan x-init sekaligus. x-data sebagai menyimpan data, x-init bisa jadi untuk menjalankan fungsi / call API.
 
 ```html
 <div x-init="console.log('Init')"></div>
@@ -596,10 +624,141 @@ Alpine.store("currentUser", {
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 
-# Directive yang belum dijelaskan
+# Tambahan
 
-- [x-modelable](https://alpinejs.dev/directives/modelable)
-- [x-id](https://alpinejs.dev/directives/id)
+- x-id akan dibahas pada magic property $id
+- x-modelable tidak terbahas
+- Sekarang masuk ke Magic Property `$`
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# $el
+
+- $el digunakan untuk mengakses elemen DOM saat ini
+
+```html
+<div x-data x-init="console.log('Init ', $el)">
+  <button @click="console.log($el)">Button</button>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# $refs & $store
+
+- $refs sudah dibahas pada x-ref
+- $store sudah dibahas pada Data coming from store
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# $watch
+
+- $watch digunakan untuk memantau isi state. Kita bisa memberikan fungsi ketika isi state berubah.
+
+```html
+<div
+  x-data="{modal: false}"
+  x-init="$watch('modal', (val) => console.log(val))"
+>
+  <button @click="modal = !modal">$watch example</button>
+</div>
+```
+
+- $watch juga dapat mengambil isi state sebelumnya dengan menambahkan argumen kedua (optional)
+
+```html
+<div
+  x-data="{modal: false}"
+  x-init="$watch('modal', (val, old) => console.log(val, old))"
+>
+  <button @click="modal = !modal">$watch example</button>
+</div>
+```
+
+- Untuk selengkapnya, cek saja di dokumentasi [$watch](https://alpinejs.dev/magics/watch)
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# $dispatch
+
+- $dispatch sudah dibahas pada x-on
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# $nextTick
+
+- $nextTick digunakan untuk menjalankan expresi setelah proses reactive DOM beres.
+
+```html
+<div x-data="{name: 'Zura'}">
+  <button
+    @click="name = 'John'; $nextTick(() => console.log($refs.p.innerText));"
+  >
+    Change Name
+  </button>
+  <p x-ref="p" x-text="name"></p>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# $root
+
+- $root digunakan untuk mengambil root element AlpineJS terdekatnya (x-data)
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+```html
+<div x-data id="1">
+  <div>
+    <div x-data id="2">
+      <div>
+        <button @click="console.log($root)">Button</button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+# $data
+
+- $data digunakan untuk mengakses Data AlpineJS pada x-data.
+
+```html
+<div x-data="dropdown">
+  <div>
+    <button @click="console.log($data.open)">$data</button>
+  </div>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# $id & x-id
+
+- $id digunakan untuk menggenerate ID untuk setiap element agar tidak ada yang konflik.
+
+```html
+<div x-data>
+  <input type="text" :id="$id('text-input')" />
+  <input type="text" :id="$id('text-input')" />
+</div>
+```
+
+- x-id digunakan untuk grouping scope id kalau-kalau idnya akan dipakai 2 kali / di element lain
+
+```html
+<div x-data="{ id: $id('text-input') }">
+    <label :for="id">
+    <input type="text" :id="id">
+</div>
+
+<div x-data="{ id: $id('text-input') }">
+    <label :for="id">
+    <input type="text" :id="id">
+</div>
+```
+
+- Untuk selengkapnya, cek saja di dokumentasi [$id](https://alpinejs.dev/magics/id)
 
 <p align="right"><a href="#top">Go 🔝</a></p>
 
