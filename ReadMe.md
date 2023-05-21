@@ -127,6 +127,12 @@
     <li>
         <a href="#intersect">Intersect</a>
     </li>
+    <li>
+        <a href="#persist">Persist</a>
+    </li>
+    <li>
+        <a href="#focus">Focus</a>
+    </li>
   </ol>
 </details>
 
@@ -1453,8 +1459,90 @@ Alpine.store("currentUser", {
 </div>
 ```
 
+- Untuk selengkapnya, cek saja di dokumentasi [Persist](https://alpinejs.dev/plugins/persist)
+
 <p align="right"><a href="#top">Go 🔝</a></p>
 
-# Judul
+# Focus
+
+- Focus digunakan untuk memanage focus element untuk keperluan `tab`
+- Instalasi bisa menggunakan CDN.
+- Pastikan untuk menempatkan cdn plugin diatas cdn alpine core
+
+```html
+<!-- Alpine Plugins -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"
+></script>
+<!-- Alpine Core -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"
+></script>
+```
+
+- Focus directive menggunakan `x-trap`
+
+```html
+<div x-data="{ open: false }">
+  <button @click="open = !open">Open Dialog</button>
+
+  <span x-show="open" x-trap="open">
+    <p>...</p>
+
+    <input type="text" placeholder="Some input..." />
+
+    <input type="text" placeholder="Some other input..." />
+
+    <button @click="open = false">Close Dialog</button>
+  </span>
+</div>
+```
+
+- Untuk selengkapnya, cek saja di dokumentasi [Focus](https://alpinejs.dev/plugins/focus)
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Collapse
+
+- Collapse digunakan untuk memberikan fungsional collapse beserta animasinya.
+- Instalasi bisa menggunakan CDN.
+- Pastikan untuk menempatkan cdn plugin diatas cdn alpine core
+
+```html
+<!-- Alpine Plugins -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
+></script>
+<!-- Alpine Core -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"
+></script>
+```
+
+- Collapse directive menggunakan `x-collapse`
+
+```html
+<div x-data="{ expanded: false }" class="w-1/3 mx-auto">
+  <p x-show="expanded" x-collapse.min.50px>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sunt magnam
+    quibusdam dignissimos excepturi quisquam repellat culpa quod cupiditate et
+    animi fugit pariatur repellendus rem ratione totam, dolor voluptatem omnis.
+  </p>
+  <button
+    @click="expanded = ! expanded"
+    x-text="expanded ? 'Read Less' : 'Read More'"
+  ></button>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Morph
+
+- Saya kehabisan energi disini (gapaham)
 
 <p align="right"><a href="#top">Go 🔝</a></p>

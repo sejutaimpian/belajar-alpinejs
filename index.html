@@ -8,22 +8,20 @@
     <title>Belajar AlpineJS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine Plugins -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <!-- Alpine Core -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"></script>
 </head>
 
 <body>
-    <div x-data="{count: $persist(0).as('my-count').using(localStorage)}">
-        <button x-on:click="count++"
-            class="inline-flex items-center py-2 px-6 bg-purple-600 hover:bg-opacity-95 text-white rounded-md shadow">
-            Increment
-        </button>
-
-        <span x-text="count"></span>
-    </div>
-    <div x-data="{name: $persist(null).as('user-name')}">
-        <input type="text" x-model="name" />
+    <div x-data="{ expanded: false }" class="w-1/3 mx-auto">
+        <p x-show="expanded" x-collapse.min.50px>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sunt
+            magnam quibusdam dignissimos excepturi quisquam repellat culpa quod
+            cupiditate et animi fugit pariatur repellendus rem ratione totam, dolor
+            voluptatem omnis.
+        </p>
+        <button @click="expanded = ! expanded" x-text="expanded ? 'Read Less' : 'Read More'"></button>
     </div>
 </body>
 
