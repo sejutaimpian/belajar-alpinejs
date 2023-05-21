@@ -7,37 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belajar AlpineJS</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine Core -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"></script>
-    <script src="alpine.js"></script>
 </head>
 
-<body class="bg-gray-100 p-8">
-    <div x-data="{
-  show: false, 
-  title: 'Test Popover',
-  message: 'Test <b>popover</b> message',
-  showPopover() {
-      console.log(this.$refs.button, this.$refs.popover)
-      this.show = !this.show
-  }
-}" class="relative flex justify-center">
-        <button x-ref="button" @click="showPopover"
+<body>
+    <div x-data="{count: $persist(0).as('my-count').using(localStorage)}">
+        <button x-on:click="count++"
             class="inline-flex items-center py-2 px-6 bg-purple-600 hover:bg-opacity-95 text-white rounded-md shadow">
-            Popover
+            Increment
         </button>
-        <div x-ref="popover" x-show="show" x-transition
-            class="absolute mb-2 bottom-[100%] shadow-lg bg-white w-[200px] rounded">
-            <!-- Header -->
-            <div class="flex justify-between items-center font-semibold py-1 px-2">
-                <span x-text="title"></span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </div>
-            <!-- Body -->
-            <div x-html="message" class="p-3 text-sm"></div>
-        </div>
+
+        <span x-text="count"></span>
+    </div>
+    <div x-data="{name: $persist(null).as('user-name')}">
+        <input type="text" x-model="name" />
     </div>
 </body>
 

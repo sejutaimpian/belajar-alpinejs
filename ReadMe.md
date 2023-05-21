@@ -115,6 +115,18 @@
     <li>
         <a href="#notification">Notification</a>
     </li>
+    <li>
+        <a href="#popover">Popover</a>
+    </li>
+    <li>
+        <a href="#intro-masuk-plugin">Intro masuk plugin</a>
+    </li>
+    <li>
+        <a href="#mask">Mask</a>
+    </li>
+    <li>
+        <a href="#intersect">Intersect</a>
+    </li>
   </ol>
 </details>
 
@@ -227,7 +239,7 @@ Versi AlpineJS yang saya gunakan adalah versi 3.12.1
 - Alpine.data tidak ditempatkan di tag html, tapi di tag script. Jadi untuk membuat Alpine.data, bisa dengan cara menambahkan tag script, atau membuat file js baru lalu dihubungkan kedalam html.
 
 ```js
-// File alpine.js
+// File app.js
 document.addEventListener("alpine:init", () => {
   Alpine.data("dropdown", () => ({
     open: false,
@@ -241,8 +253,8 @@ document.addEventListener("alpine:init", () => {
 ```
 
 ```html
-<!-- Menghubungkan ke file alpine.js -->
-<script src="alpine.js"></script>
+<!-- Menghubungkan ke file app.js -->
+<script src="app.js"></script>
 <!-- After -->
 <div x-data="dropdown">
   <button @click="toggle">Open/Close</button>
@@ -270,7 +282,7 @@ document.addEventListener("alpine:init", () => {
 - Alpine.store tidak ditempatkan di tag html, tapi di tag script. Jadi untuk membuat Alpine.store, bisa dengan cara menambahkan tag script, atau membuat file js baru lalu dihubungkan kedalam html.
 
 ```js
-// alpine.js
+// app.js
 Alpine.store("currentUser", {
   username: "TheCodeholic",
   posts: ["Post1", "Post2"],
@@ -289,7 +301,7 @@ Alpine.store("currentUser", {
 
 - x-init digunakan untuk menginisialisasi component AlpineJS.
 - yang membedakan inisialisasi x-init dengan x-data adalah x-init akan langsung menjalankan perintah didalamnya.
-- Nanti kalian akan menemukan kasus untuk memakan x-data dan x-init sekaligus. x-data sebagai menyimpan data, x-init bisa jadi untuk menjalankan fungsi / call API.
+- Nanti kalian akan menemukan kasus untuk memakai x-data dan x-init sekaligus. x-data sebagai menyimpan data, x-init bisa jadi untuk menjalankan fungsi / call API.
 
 ```html
 <div x-init="console.log('Init')"></div>
@@ -1317,6 +1329,127 @@ Alpine.store("currentUser", {
     <!-- Body -->
     <div x-html="message" class="p-3 text-sm"></div>
   </div>
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Intro masuk plugin
+
+- Pastikan untuk menempatkan cdn plugin diatas cdn alpine core
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Mask
+
+- Mask digunakan untuk memformat inputan user otomatis & dinamis. contohnya nomor hp, kartu kredit, dll
+- Instalasi bisa menggunakan CDN.
+- Pastikan untuk menempatkan cdn plugin diatas cdn alpine core
+
+```html
+<!-- Alpine Mask Plugins -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"
+></script>
+
+<!-- Alpine Core -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"
+></script>
+```
+
+- Mask directive menggunakan `x-mask`
+
+```html
+<div x-data>
+  <input type="text" x-mask="99/99/9999" placeholder="MM/DD/YYYY" />
+
+  <input
+    x-mask:dynamic="
+      $input.startsWith('34') || $input.startsWith('37')
+          ? '9999 999999 99999' : '9999 9999 9999 9999'
+  "
+  />
+</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Intersect
+
+- Intersect digunakan untuk mengatur element saat berada di viewport.
+- Berguna untuk lazy load images/content, triggering animations, dll
+- Untuk coding pugin ini menggunakan TailwindCSS
+- Instalasi bisa menggunakan CDN.
+- Pastikan untuk menempatkan cdn plugin diatas cdn alpine core
+
+```html
+<!-- Alpine Plugins -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"
+></script>
+<!-- Alpine Core -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"
+></script>
+```
+
+- Intersect directive menggunakan `x-intersect`
+
+```html
+<div class="bg-gray-800 min-h-screen text-white">null</div>
+<div x-data="{ shown: false }" x-intersect="shown = true">
+  <div x-show="shown" x-transition>I'm in the viewport!</div>
+</div>
+<div x-data>
+  <div
+    x-data="{dataSrc: '1.jpg', src: null}"
+    class="w-48 h-48 border"
+    x-intersect.once.half="src = dataSrc"
+  >
+    <img x-show="src" x-transition :src="src" alt="" />
+  </div>
+</div>
+<div class="bg-gray-800 min-h-screen text-white">null</div>
+```
+
+<p align="right"><a href="#top">Go 🔝</a></p>
+
+# Persist
+
+- Persist digunakan untuk menyimpan state ke localStorage.
+- Instalasi bisa menggunakan CDN.
+- Pastikan untuk menempatkan cdn plugin diatas cdn alpine core
+
+```html
+<!-- Alpine Plugins -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+></script>
+<!-- Alpine Core -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"
+></script>
+```
+
+- Persist menggunakan magic method `$persist`
+
+```html
+<div x-data="{count: $persist(0).as('my-count').using(localStorage)}">
+  <button
+    x-on:click="count++"
+    class="inline-flex items-center py-2 px-6 bg-purple-600 hover:bg-opacity-95 text-white rounded-md shadow"
+  >
+    Increment
+  </button>
+
+  <span x-text="count"></span>
 </div>
 ```
 
