@@ -348,22 +348,24 @@ Alpine.store("currentUser", {
 
 - Konsep getter & setter sama seperti pada javascript.
 - Saya juga kurang faham soal ini, TheCodeholic juga ga terlalu menjelaskan detail.
-- TheCodeholic sepertinya salah dalam penerapan getter & setter. Saya memperbaikinya di block code
 
 ```html
 <div
   x-data="{
         open: false,
-        get getOpen() {
+        get isOpen() {
             return this.open;
         },
-        set setOpen(open) {
+        set isOpen(open) {
             this.open = open
+        },
+        toggle(){
+          this.isOpen = !this.isOpen
         }
     }"
 >
-  <button @click="setOpen = !getOpen">Open/Close</button>
-  <div x-show="getOpen">Content</div>
+  <button @click="toggle()">Open/Close</button>
+  <div x-show="isOpen">Content</div>
 </div>
 ```
 
